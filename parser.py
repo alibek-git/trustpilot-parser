@@ -43,16 +43,16 @@ while True:
         star_ratings = soup.find_all('label', class_='styles_row__wvn4i')
 
         star_data = {}
-        for rating in star_ratings:
-            star_label = rating.find('p', class_='typography_body-m__xgxZ_ typography_appearance-default__AAY17 styles_cell__qnPHy styles_labelCell__vLP9S').text
-            title = rating['title']
-            print("Title:", title)  # Print the title to see its format
+        for count in star_ratings:
+            star_label = count.find('p', class_='typography_body-m__xgxZ_ typography_appearance-default__AAY17 styles_cell__qnPHy styles_labelCell__vLP9S').text
+            title = count['title']
+            # print("Title:", title)  # Print the title to see its format
             # Updated regular expression pattern to match numbers with commas
             matches = re.search(r'(\d+(?:,\d+)?) of (\d+(?:,\d+)?) reviews', title)
             if matches:
                 # Replace commas with empty strings before converting to int
                 reviews_count = int(matches.group(1).replace(',', ''))
-                print("Matched Reviews Count:", reviews_count)  # Print the extracted number of reviews
+                # print("Matched Reviews Count:", reviews_count)  # Print the extracted number of reviews
             else:
                 reviews_count = 0
             star_data[star_label] = reviews_count
@@ -81,7 +81,7 @@ while True:
         sheet.insert_row(data, 2)  # 2 means it's inserted as the second row (after headers)
 
         # Wait for the amount of seconds for the next parsing
-        time.sleep(10)
+        time.sleep(3600)
 
     else:
         print("Failed to retrieve the webpage. Status code:", response.status_code)
